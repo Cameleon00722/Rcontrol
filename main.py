@@ -204,6 +204,76 @@ def menuRs():
     window.geometry("800x500+10+20")
     window.mainloop()
 
+def calcul():
+    total = 0
+    with open("gain.txt", 'r') as filin:
+        lignes = filin.readlines()
+    for ligne in lignes:
+        int_nbr = int(ligne)
+        total += int_nbr
+
+    with open("perte.txt", 'r') as filin:
+        lignes = filin.readlines()
+    for ligne in lignes:
+        int_nbr = int(ligne)
+        total -= int_nbr
+    messagebox.showinfo("total", total)
+
+def ajout(txtfld,C1,C2):
+    Val = txtfld.get()
+
+    for i in C1.state():
+        if i == "selected":
+            print("gain")
+
+            f = open('gain.txt', 'a')
+            f.write(Val + '\n')
+            f.close()
+
+
+    for i in C2.state():
+        if i == "selected":
+            print("perte")
+            f = open('perte.txt', 'a')
+            f.write(Val + '\n')
+            f.close()
+
+
+
+
+def NoteFr():
+    menu = Tk()
+
+    txtfld = Entry(menu, text="valeur", bd=5)
+    txtfld.place(x=340, y=50)
+    lbl2 = Label(menu, text="valeur", fg='red', font=("Helvetica", 16))
+    lbl2.place(x=260, y=47)
+
+    v1 = IntVar()
+    v2 = IntVar()
+
+    C1 = ttk.Checkbutton(menu, text="gain", variable=v1, onvalue=1, offvalue=0)
+    C1.grid(column=0, row=0)
+
+    C2 = ttk.Checkbutton(menu, text="perte", variable=v2)
+    C2.grid(column=0, row=0)
+
+    C1.place(x=300, y=100)
+    C2.place(x=470, y=100)
+
+
+    btn = Button(menu, text="envoyer", fg='blue', command= lambda : ajout(txtfld,C1,C2))
+    btn.place(x=700, y=450)
+
+    btn = Button(menu, text="argent", fg='blue', command=calcul)
+    btn.place(x=100, y=450)
+
+    menu.title('Rcontrol')
+    menu.geometry("800x500+10+20")
+    menu.mainloop()
+
+
+
 
 menu = Tk()
 
@@ -217,7 +287,7 @@ btn.place(x=500, y=150)
 btn = Button(menu, text="emploi du temps", fg='blue')
 btn.place(x=200, y=350)
 
-btn = Button(menu, text="note de frais", fg='blue')
+btn = Button(menu, text="note de frais", fg='blue', command=NoteFr)
 btn.place(x=500, y=350)
 
 menu .title('Rcontrol')
