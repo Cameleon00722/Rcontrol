@@ -1,6 +1,11 @@
 ***This app is currently still in work so may expect some bug ( report it to me  please )***
 
 
+update 0.2
+allow you to manage your account and allow you to upload file easily for free
+
+
+
 you need first to create an account on https://app.ayrshare.com/api
 
 and copy the api key
